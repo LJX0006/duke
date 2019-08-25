@@ -33,17 +33,16 @@ public class Duke {
             else if (s.contains(mark)) {
                 String temp = s.replaceAll("[^0-9]", "");
                 int num = Integer.parseInt(temp);
-                String change;
-                change = item[num - 1].replace(todo, finish);
-                item[num - 1] = change;
+                item[num - 1].markAsDone();
                 System.out.println("    ____________________________________________________________\n"
                         + "     Nice! I've marked this task as done: \n"
-                        + "       " + item[num - 1] + "\n"
+                        + "       " + item[num - 1].getStatusIcon() + item[num - 1].description + "\n"
                         + "    ____________________________________________________________");
             }
             else {
                 n++;
-                item[n] = todo + s;
+                Task t = new Task(s);
+                item[n] = t;
                 System.out.println("    ____________________________________________________________\n"
                         + "     added: " + s + "\n"
                         + "    ____________________________________________________________");
