@@ -16,19 +16,34 @@ public class Duke {
         String s = in.nextLine();
         String stop = "bye";
         String show = "list";
+        String mark = "done";
+        String todo = "[✗] ";
+        String finish = "[✓] ";
         String[] item = new String[100];
         int n = -1;
         while (!(s.equals(stop))) {
             if (s.equals(show)) {
-                System.out.println("    ____________________________________________________________");
+                System.out.println("    ____________________________________________________________\n"
+                        + "     Here are the tasks in your list:");
                 for (int i = 1; i <= n + 1; i++) {
                     System.out.println("     " + i + ". " + item[i - 1]);
                 }
                 System.out.println("    ____________________________________________________________");
             }
+            else if (s.contains(mark)) {
+                String temp = s.replaceAll("[^0-9]", "");
+                int num = Integer.parseInt(temp);
+                String change;
+                change = item[num - 1].replace(todo, finish);
+                item[num - 1] = change;
+                System.out.println("    ____________________________________________________________\n"
+                        + "     Nice! I've marked this task as done: \n"
+                        + "       " + item[num - 1] + "\n"
+                        + "    ____________________________________________________________");
+            }
             else {
                 n++;
-                item[n] = s;
+                item[n] = todo + s;
                 System.out.println("    ____________________________________________________________\n"
                         + "     added: " + s + "\n"
                         + "    ____________________________________________________________");
