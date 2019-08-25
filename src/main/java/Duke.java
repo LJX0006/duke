@@ -19,7 +19,7 @@ public class Duke {
         String mark = "done";
         String todo = "[✗] ";
         String finish = "[✓] ";
-        String[] item = new String[100];
+        Task[] item = new Task[100];
         int n = -1;
         while (!(s.equals(stop))) {
             if (s.equals(show)) {
