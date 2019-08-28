@@ -14,23 +14,18 @@ public class Duke {
 
         Scanner in = new Scanner (System.in);
         String s = in.nextLine();
-        String stop = "bye";
-        String show = "list";
-        String mark = "done";
-        String todo = "[✗] ";
-        String finish = "[✓] ";
         Task[] item = new Task[100];
         int n = -1;
-        while (!(s.equals(stop))) {
-            if (s.equals(show)) {
+        while (!(s.equals("bye"))) {
+            if (s.equals("list")) {
                 System.out.println("    ____________________________________________________________\n"
                         + "     Here are the tasks in your list:");
                 for (int i = 1; i <= n + 1; i++) {
-                    System.out.println("     " + i + ". " + item[i - 1]);
+                    System.out.print("     " + i + ". " + item[i - 1].toString() + "\n".toString());
                 }
                 System.out.println("    ____________________________________________________________");
             }
-            else if (s.contains(mark)) {
+            else if (s.contains("done")) {
                 String temp = s.replaceAll("[^0-9]", "");
                 int num = Integer.parseInt(temp);
                 item[num - 1].markAsDone();
@@ -41,11 +36,26 @@ public class Duke {
             }
             else {
                 n++;
-                Task t = new Task(s);
-                item[n] = t;
-                System.out.println("    ____________________________________________________________\n"
-                        + "     added: " + s + "\n"
-                        + "    ____________________________________________________________");
+                String[] type = s.split(" ");
+                if (type[0].equals("todo")) {
+                    Task t = new Todo(s.replaceFirst("todo ", ""));
+                    item[n] = t;
+                }
+                else if (type[0].equals("deadline")) {
+                    String[] getDate = s.split("/by ");
+                    Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""), getDate[getDate.length-1]);
+                    item[n] = t;
+                }
+                else if (type[0].equals("event")) {
+                    String[] getDate = s.split("/at ");
+                    Task t = new Event(getDate[0].replaceFirst("event ", ""), getDate[getDate.length-1]);
+                    item[n] = t;
+                }
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Got it. I've added this task: ");
+                System.out.println("     " + item[n].toString());
+                System.out.println("     Now you have " + (n + 1) + " tasks in the list.");
+                System.out.println("    ____________________________________________________________");
             }
             s = in.nextLine();
         }
