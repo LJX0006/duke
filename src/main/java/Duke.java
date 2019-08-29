@@ -1,4 +1,6 @@
+import java.io.*;
 import java.util.*;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -16,6 +18,9 @@ public class Duke {
         String s = in.nextLine();
         Task[] item = new Task[100];
         int n = 0;
+        Save save = new Save();
+        item = save.getDetail();
+        n = save.getNum();
         while (!(s.equals("bye"))) {
             if (s.equals("list")) {
                 System.out.println("    ____________________________________________________________\n");
@@ -29,6 +34,7 @@ public class Duke {
                 String temp = s.replaceAll("[^0-9]", "");
                 int num = Integer.parseInt(temp);
                 item[num - 1].markAsDone();
+                save.writeFile(item);
                 System.out.println("    ____________________________________________________________\n");
                 System.out.println("    Nice! I've marked this task as done:\n");
                 System.out.println("       [✓] " + item[num - 1].description + "\n");
@@ -68,6 +74,7 @@ public class Duke {
                             break;
                         }
                     }
+                    save.writeFile(item);
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     Got it. I've added this task: ");
                     System.out.println("     " + item[n - 1].toString());

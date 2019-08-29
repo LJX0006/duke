@@ -3,6 +3,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        super.symbol = "D";
     }
     @Override
     public String toString() {
