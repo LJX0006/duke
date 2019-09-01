@@ -1,7 +1,8 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Save {
-    private static Task[] item = new Task[100];
+    private static ArrayList<Task> item = new ArrayList<>();
     private static int n = 0;
 
     public Save() {
@@ -25,7 +26,8 @@ public class Save {
                 if (detail[1].equals("1")) {
                     t.markAsDone();
                 }
-                item[n++] = t;
+                item.add(t);
+                n++;
             }
             bufferedReader.close();
         } catch (IOException e) {
@@ -33,7 +35,7 @@ public class Save {
         }
     }
 
-    public Task[] getDetail() {
+    public ArrayList<Task> getDetail() {
         return item;
     }
 
@@ -41,7 +43,7 @@ public class Save {
         return n;
     }
 
-    public void writeFile(Task[] List) {
+    public void writeFile(ArrayList<Task> List) {
         try {
             FileWriter fileWriter = new FileWriter("data/duke.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
