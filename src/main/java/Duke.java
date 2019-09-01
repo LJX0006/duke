@@ -3,6 +3,7 @@ import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -19,30 +20,40 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
-        Task[] item = new Task[100];
         int n = 0;
         Save save = new Save();
-        item = save.getDetail();
-        n = save.getNum();
+        ArrayList<Task> item = save.getDetail();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         while (!(s.equals("bye"))) {
             if (s.equals("list")) {
                 System.out.println("    ____________________________________________________________\n");
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 1; i <= n; i++) {
-                    System.out.print("     " + i + ". " + item[i - 1].toString() + "\n".toString());
+                System.out.println("    Here are the tasks in your list:");
+                int i = 1;
+                for (Task t : item) {
+                    System.out.println("    " + i + "." + t.toString() + "\n");
+                    i = i + 1;
                 }
                 System.out.println("    ____________________________________________________________");
             }
             else if (s.contains("done")) {
                 String temp = s.replaceAll("[^0-9]", "");
                 int num = Integer.parseInt(temp);
-                item[num - 1].markAsDone();
+                item.get(num-1).markAsDone();
                 save.writeFile(item);
                 System.out.println("    ____________________________________________________________\n");
                 System.out.println("    Nice! I've marked this task as done:\n");
-                System.out.println("       [✓] " + item[num - 1].description + "\n");
+                System.out.println("   [✓] " + item.get(num-1).description + "\n");
                 System.out.println("    ____________________________________________________________\n");
+            }
+            else if (s.contains("find")) {
+                String keyword = s.split(" ")[1];
+                int i = 1;
+                System.out.println("____________________________________________________________\n");
+                for (Task t : item) {
+                    if (t.description.contains(keyword))
+                        System.out.println(" " + i++ + "." + t.toString() + "\n");
+                }
+                System.out.println("____________________________________________________________\n");
             }
             else {
                 try {
@@ -56,7 +67,7 @@ public class Duke {
                                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                             }
                             Task t = new Todo(s.replaceFirst("todo ", ""));
-                            item[n++] = t;
+                            item.add(t);
                             break;
                         }
                         case "deadline": {
@@ -67,7 +78,7 @@ public class Duke {
                             Date date = simpleDateFormat.parse(getDate[getDate.length-1]);
                             String formatTime = simpleDateFormat.format(date);
                             Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""), formatTime);
-                            item[n++] = t;
+                            item.add(t);
                             break;
                         }
                         case "event": {
@@ -78,15 +89,15 @@ public class Duke {
                             Date date = simpleDateFormat.parse(getDate[getDate.length-1]);
                             String formatTime = simpleDateFormat.format(date);
                             Task t = new Event(getDate[0].replaceFirst("event ", ""), formatTime);
-                            item[n++] = t;
+                            item.add(t);
                             break;
                         }
                     }
                     save.writeFile(item);
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     Got it. I've added this task: ");
-                    System.out.println("     " + item[n - 1].toString());
-                    System.out.println("     Now you have " + n + " tasks in the list.");
+                    System.out.println("     " + item.get(item.size()-1).toString());
+                    System.out.println("     Now you have " + item.size() + " tasks in the list.");
                     System.out.println("    ____________________________________________________________");
                 } catch (DukeException | ParseException e) {
                     e.printStackTrace();
