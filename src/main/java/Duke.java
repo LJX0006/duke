@@ -1,5 +1,8 @@
 import java.io.*;
 import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke {
     public static void main(String[] args) {
@@ -21,6 +24,7 @@ public class Duke {
         Save save = new Save();
         item = save.getDetail();
         n = save.getNum();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
         while (!(s.equals("bye"))) {
             if (s.equals("list")) {
                 System.out.println("    ____________________________________________________________\n");
@@ -60,7 +64,9 @@ public class Duke {
                                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                             }
                             String[] getDate = s.split("/by ");
-                            Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""), getDate[getDate.length - 1]);
+                            Date date = simpleDateFormat.parse(getDate[getDate.length-1]);
+                            String formatTime = simpleDateFormat.format(date);
+                            Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""), formatTime);
                             item[n++] = t;
                             break;
                         }
@@ -69,7 +75,9 @@ public class Duke {
                                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                             }
                             String[] getDate = s.split("/at ");
-                            Task t = new Event(getDate[0].replaceFirst("event ", ""), getDate[getDate.length - 1]);
+                            Date date = simpleDateFormat.parse(getDate[getDate.length-1]);
+                            String formatTime = simpleDateFormat.format(date);
+                            Task t = new Event(getDate[0].replaceFirst("event ", ""), formatTime);
                             item[n++] = t;
                             break;
                         }
@@ -80,11 +88,11 @@ public class Duke {
                     System.out.println("     " + item[n - 1].toString());
                     System.out.println("     Now you have " + n + " tasks in the list.");
                     System.out.println("    ____________________________________________________________");
-                } catch (DukeException e) {
+                } catch (DukeException | ParseException e) {
                     e.printStackTrace();
                 }
             }
-                s = in.nextLine();
+            s = in.nextLine();
         }
         System.out.println("    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
