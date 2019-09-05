@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Task{
     protected String description;
     protected boolean isDone;
@@ -10,6 +12,10 @@ public class Task{
 
     public String getStatusIcon() {
         return (isDone? "[✓]" : "[✗]"); //return tick or X symbols
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void markAsDone() {
