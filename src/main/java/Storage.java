@@ -1,9 +1,16 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * the class to read from or write to the local file
+ */
 public class Storage {
     private String file;
 
+    /**
+     * the constructor to initialize the storage tool
+     * @param filePath the path of the file which contains the data of the task list
+     */
     public Storage(String filePath) {
         file = filePath;
     }

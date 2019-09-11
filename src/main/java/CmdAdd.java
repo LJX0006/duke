@@ -2,18 +2,35 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * This command will add a new task to the list
+ */
+
 public class CmdAdd extends Command {
 
     private String cmdType;
     private String s;
     private SimpleDateFormat simpleDateFormat;
 
+    /**
+     * The constructor to initialize a add command object
+     * @param str the type of the command
+     * @param cmd original command from the input
+     */
     public CmdAdd(String str, String cmd) {
         cmdType = str;
         s = cmd;
         simpleDateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
     }
 
+    /**
+     * The methods to execute the command based on its type
+     * @param list the tasklist object
+     * @param ui to print on user interface
+     * @param storage to edit local saved file
+     * @throws ParseException when the parsing in wrong
+     * @throws DukeException when the command line cannot be identified
+     */
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws ParseException, DukeException {
         switch (cmdType) {
@@ -54,6 +71,10 @@ public class CmdAdd extends Command {
         System.out.println("    Now you have " + list.getSize() + " tasks in the list.");
     }
 
+    /**
+     * method to label whether this command means stopping running
+     * @return whether this command means stopping running
+     */
     @Override
     public boolean isExit() {
         return false;

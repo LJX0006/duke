@@ -3,6 +3,9 @@ import java.util.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+/**
+ * The control module
+ */
 public class Duke {
     private Ui ui;
     private TaskList tasks;
@@ -37,6 +40,12 @@ public class Duke {
         }
     }
 
+    /**
+     * This method initializes a duke object and run it
+     *
+     * @param args the input
+     * @throws DukeException some error messages
+     */
     public static void main(String[] args) throws DukeException {
         new Duke("data/tasks.txt").run();
     }

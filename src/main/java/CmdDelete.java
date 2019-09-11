@@ -1,8 +1,15 @@
 import java.text.ParseException;
 
+/**
+ * The command to delete a task from the list
+ */
 public class CmdDelete extends Command {
     private int num;
 
+    /**
+     * the constructor
+     * @param n the index number of the task to be deleted
+     */
     protected CmdDelete(int n) {
         num = n;
     }

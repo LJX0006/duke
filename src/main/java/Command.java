@@ -1,5 +1,8 @@
 import java.text.ParseException;
 
+/**
+ * the abstract class for all types of commands from inputs
+ */
 public abstract class Command {
     public Command() { }
 

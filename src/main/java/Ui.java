@@ -1,6 +1,9 @@
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * the class to generate user interface
+ */
 public class Ui {
     private Scanner scanner;
 
@@ -8,6 +11,10 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * read command from the input
+     * @return return the command read
+     */
     public String readCmd() {
         return scanner.nextLine();
     }
