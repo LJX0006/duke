@@ -1,7 +1,7 @@
 import java.text.ParseException;
 
 /**
- * the command to print all the tasks
+ * print all the tasks
  */
 public class CmdList extends Command{
 

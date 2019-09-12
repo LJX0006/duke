@@ -1,13 +1,13 @@
 import java.text.ParseException;
 
 /**
- * the command to find the tasks containing keyword in the input
+ * find the tasks containing keyword in the input
  */
 public class CmdFind extends Command {
     private String keyword;
 
     /**
-     * the constructor which initialize the search command object
+     * initialize the search command object
      * @param s the keyword
      */
     protected CmdFind(String s) {

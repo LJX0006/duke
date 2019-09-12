@@ -41,7 +41,7 @@ public class Duke {
     }
 
     /**
-     * This method initializes a duke object and run it
+     * initialize a duke object and run it
      *
      * @param args the input
      * @throws DukeException some error messages

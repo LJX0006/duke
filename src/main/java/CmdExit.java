@@ -1,7 +1,7 @@
 import java.text.ParseException;
 
 /**
- * the command to stop running
+ * stop running the program
  */
 public class CmdExit extends Command {
 

@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This command will add a new task to the list
+ * add a new task to the list
  */
 
 public class CmdAdd extends Command {
@@ -13,7 +13,7 @@ public class CmdAdd extends Command {
     private SimpleDateFormat simpleDateFormat;
 
     /**
-     * The constructor to initialize a add command object
+     * initialize a add command object
      * @param str the type of the command
      * @param cmd original command from the input
      */
@@ -24,7 +24,7 @@ public class CmdAdd extends Command {
     }
 
     /**
-     * The methods to execute the command based on its type
+     * execute the command based on its type
      * @param list the tasklist object
      * @param ui to print on user interface
      * @param storage to edit local saved file
@@ -72,7 +72,7 @@ public class CmdAdd extends Command {
     }
 
     /**
-     * method to label whether this command means stopping running
+     * check if the program needs to stop running
      * @return whether this command means stopping running
      */
     @Override

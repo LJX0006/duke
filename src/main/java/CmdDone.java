@@ -1,13 +1,13 @@
 import java.text.ParseException;
 
 /**
- * The command to mark a task as done
+ * mark a task as done
  */
 public class CmdDone extends Command {
     private int num;
 
     /**
-     * the constructor to initialize the done command
+     * initialize the done command
      * @param n the index number of the task to be marked as done
      */
     public CmdDone(int n) {
